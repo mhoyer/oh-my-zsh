@@ -28,19 +28,15 @@ function omz_termsupport_preexec {
   title "$CMD" "%100>...>$2%<<"
 }
 
+function term_color() { echo -e "%{\033[$1m%}$2%{\033[0m%}" } 
+function term_color_open() { echo -e "%{\033[$1m%}" }
+function term_color_reset() { echo -e "%{\033[0m%}" }
+
 # Prints given 2nd argument with xterm color code of 1st argument
 # see http://www.calmar.ws/vim/256-xterm-24bit-rgb-color-chart.html for color codes
-function xterm_color() {
-  echo -e "%{\033[38;5;$1m%}$2%{\033[0m%}"
-}
-
-function xterm_color_open() {
-  echo -e "%{\033[38;5;$1m%}"
-}
-
-function xterm_color_reset() {
-  echo -e "%{\033[0m%}"
-}
+function xterm_color() { term_color "38;5;$1" $2 }
+function xterm_color_open() { term_color_open "38;5;$1" }
+function xterm_color_reset() { term_color_reset }
 
 function _show_colors() {
  T='■'   # The test text
